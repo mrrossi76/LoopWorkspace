@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   
   ## Remove the "#" sign from the beginning of the line below to get automated builds on push (code changes in your repository)
-  #push:
+  push:
 
   schedule:
     - cron: '0 04 * * *' # Checks for updates at 04:00 UTC every day
