@@ -273,28 +273,35 @@ jobs:
           # Submodule LoopKit patches:
           # General template for customizing submodule LoopKit 
           # Copy url from a GitHub commit or pull request and insert below, and remove the "#" sign from the beginning of the line to activate:
-          curl url_to_github_commit.patch | git apply --directory=LoopKit -v --whitespace=fix
+          # curl url_to_github_commit.patch | git apply --directory=LoopKit -v --whitespace=fix
 
           # Submodule xxxxx patches:
-          https://github.com/LoopKit/Loop/pull/2191/commits/f917bb39b5fe07ae3b9f873eff4a0e20488e59e8
-          https://github.com/LoopKit/Loop/pull/2191/commits/74d437f1c5feabfe142278a7d5f34717cb42f698
-          https://github.com/LoopKit/Loop/pull/2191/commits/8a8cdd8dc6fc2527638578fb38f3896954217eb7
-          https://github.com/LoopKit/Loop/pull/2191/commits/6301811c0b4dce3082c57e865a8c569a7da1b474
-          https://github.com/LoopKit/Loop/pull/2191/commits/e7fe0a8e6671872b70dd8a4f83710b4d8456cab9
-          https://github.com/LoopKit/Loop/pull/2191/commits/a836f7cc7ef351753d08b6e51b224f19f759adaa
-          https://github.com/LoopKit/Loop/pull/2191/commits/1d0b0693eee9465453af20fff1d05c2baa4bf5dc
-          https://github.com/LoopKit/Loop/pull/2191/commits/91795ab4d13f3d9ee809ec67ac0d03edb8fc5600
-          https://github.com/LoopKit/Loop/pull/2191/commits/ec50153e4023a8e1f19f57b893417c20ed3be3b5
-          https://github.com/LoopKit/Loop/pull/2191/commits/85406a51bce3640ff03e829bc0cb2a872a3f0163
-          https://github.com/LoopKit/Loop/pull/2191/commits/aa439e4084baf4705359953a4a1a95c19d7525a8
-          https://github.com/LoopKit/Loop/pull/2191/commits/44e915d5c45b9976ff971015bc54576562332286
-          https://github.com/LoopKit/Loop/pull/2191/commits/69a235a84e1b14eae4f616f9aaa058ad0f47f8db
 
           # Add patches for customization of additional submodules by following the templates above, 
           # and make sure to specify the submodule by setting "--directory=(submodule_name)".
           # Several patches may be added per submodule.
           # Adding comments (#) may be useful to easily tell the individual patches apart.
 
+      # The lines below add the customizations listed using the CustomizationSelect script
+          # The "\" is a continuation character 
+          #   the line following a "\" should not be blank
+          /bin/bash -c "$(curl -fsSL \
+          https://raw.githubusercontent.com/loopandlearn/lnl-scripts/main/CustomizationSelect.sh)" \
+          dexcom_upload_readings \
+          future_carbs_4h \
+          now_line \
+          2hlollipop \
+          meal_week \
+          profiles \
+          basal_lock \
+          live_activity \
+          negative_insulin \
+          bolus_display \
+          g7_scan
+
+          # the final customization listed above CANNOT have a continuation character
+          # more customizations can be pasted after this line
+          
       # Patch Fastlane Match to not print tables
       - name: Patch Match Tables
         run: |
